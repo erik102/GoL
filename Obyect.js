@@ -1,7 +1,6 @@
-class Obyect {
+class Obyect extends LivingCreature {
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
+        super(x, y)
         this.energy = 8;
         this.multiply = 0
         this.directions = [];
@@ -19,25 +18,13 @@ class Obyect {
             [this.x + 1, this.y + 1]
         ];
     }
-
-    chooseCell(character) {
+    chooseCell(character){
         this.getNewCoordinates()
-        var found = [];
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
 
-                if (matrix[y][x] == character) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
+        return super. chooseCell(character)
+
     }
-
     
-
     move() {
         this.energy--
         var emptyCells = this.chooseCell(0)
@@ -52,77 +39,77 @@ class Obyect {
             this.x = newX
             this.y = newY
         }
-       
-        }
-
-        eat() {
-            var emptyCells = this.chooseCell(2)
-            var newCell= emptyCells[Math.floor(Math.random() * emptyCells.length)]
-    
-            var emptyCells1 = this.chooseCell(3)
-            var newCell1 = emptyCells1[Math.floor(Math.random() * emptyCells1.length)]
-    
-            var emptyCells2 = this.chooseCell(1)
-            var newCell2= emptyCells2[Math.floor(Math.random() * emptyCells2.length)]
-    
-            if (newCell) {
-                this.energy++
-                var newX = newCell[0]
-                var newY = newCell[1]
-    
-                matrix[newY][newX] = matrix[this.y][this.x]
-                matrix[this.y][this.x] = 0
-                this.x = newX
-                this.y = newY
-                for (var i in grassEaterArr) {
-                    if (newX == grassEaterArr[i].x && newY == grassEaterArr[i].y) {
-                        grassEaterArr.splice(i, 1)
-                        break
-                    }
-                }
-                
-                
-            }
-           else if (newCell1) {
-                this.energy++
-                var newX = newCell1[0]
-                var newY = newCell1[1]
-    
-                matrix[newY][newX] = matrix[this.y][this.x]
-                matrix[this.y][this.x] = 0
-                this.x = newX
-                this.y = newY
-                for (var i in predatorArr) {
-                    if (newX == predatorArr[i].x && newY == predatorArr[i].y) {
-                        predatorArr.splice(i, 1)
-                        break
-                    }
-                }
-                
-                
-            }
-            else if (newCell2) {
-                this.energy++
-                var newX = newCell2[0]
-                var newY = newCell2[1]
-    
-                matrix[newY][newX] = matrix[this.y][this.x]
-                matrix[this.y][this.x] = 0
-                this.x = newX
-                this.y = newY
-                for (var i in grassArr) {
-                    if (newX == grassArr[i].x && newY == grassArr[i].y) {
-                        grassArr.splice(i, 1)
-                        break
-                    }
-                }
-                
-                
-            }
-            
-            else {
-                this.move()
-            }
-        }
 
     }
+
+    eat() {
+        var emptyCells = this.chooseCell(2)
+        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
+
+        var emptyCells1 = this.chooseCell(3)
+        var newCell1 = emptyCells1[Math.floor(Math.random() * emptyCells1.length)]
+
+        var emptyCells2 = this.chooseCell(1)
+        var newCell2 = emptyCells2[Math.floor(Math.random() * emptyCells2.length)]
+
+        if (newCell) {
+            this.energy++
+            var newX = newCell[0]
+            var newY = newCell[1]
+
+            matrix[newY][newX] = matrix[this.y][this.x]
+            matrix[this.y][this.x] = 0
+            this.x = newX
+            this.y = newY
+            for (var i in grassEaterArr) {
+                if (newX == grassEaterArr[i].x && newY == grassEaterArr[i].y) {
+                    grassEaterArr.splice(i, 1)
+                    break
+                }
+            }
+
+
+        }
+        else if (newCell1) {
+            this.energy++
+            var newX = newCell1[0]
+            var newY = newCell1[1]
+
+            matrix[newY][newX] = matrix[this.y][this.x]
+            matrix[this.y][this.x] = 0
+            this.x = newX
+            this.y = newY
+            for (var i in predatorArr) {
+                if (newX == predatorArr[i].x && newY == predatorArr[i].y) {
+                    predatorArr.splice(i, 1)
+                    break
+                }
+            }
+
+
+        }
+        else if (newCell2) {
+            this.energy++
+            var newX = newCell2[0]
+            var newY = newCell2[1]
+
+            matrix[newY][newX] = matrix[this.y][this.x]
+            matrix[this.y][this.x] = 0
+            this.x = newX
+            this.y = newY
+            for (var i in grassArr) {
+                if (newX == grassArr[i].x && newY == grassArr[i].y) {
+                    grassArr.splice(i, 1)
+                    break
+                }
+            }
+
+
+        }
+
+        else {
+            this.move()
+        }
+    }
+
+}
