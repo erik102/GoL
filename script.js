@@ -1,11 +1,11 @@
 var socket = io();
 
-let side = 30;
+ side = 25;
 
 
 function setup() {
     frameRate(5);
-    createCanvas(10 * side, 10 * side);
+    createCanvas(15 * side, 15 * side);
     background('#acacac');
 }
 

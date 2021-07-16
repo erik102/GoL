@@ -70,7 +70,9 @@ obyectArr = []
 
 Grass = require("./Grass")
 GrassEater = require("./GrassEater")
-
+Predator = require("./Predator")
+Stone = require("./Stone")
+Obyect = require("./Obyect")
 
 function createObject(matrix) {
     for (var y = 0; y < matrix.length; ++y) {
@@ -80,20 +82,20 @@ function createObject(matrix) {
                 grassArr.push(gr);
             }
             else if (matrix[y][x] == 2) {
-                var gr = new GrassEater(x, y);
-                grassEaterArr.push(gr);
+                var grEat = new GrassEater(x, y);
+                grassEaterArr.push(grEat);
             }
             else if (matrix[y][x] == 3) {
-                var gr = new Predator(x, y);
-                predatorArr.push(gr);
+                var Pr = new Predator(x, y);
+                predatorArr.push(Pr);
             }
             else if (matrix[y][x] == 4) {
-                var gr = new Stone(x, y);
-                stoneArr.push(gr);
+                var St = new Stone(x, y);
+                stoneArr.push(St);
             }
             else if (matrix[y][x] == 5) {
-                var gr = new Obyect(x, y);
-                obyectArr.push(gr);
+                var Ob = new Obyect(x, y);
+                obyectArr.push(Ob);
             }
         }
 
@@ -103,7 +105,7 @@ function createObject(matrix) {
 
 function game() {
     for (var i in grassArr) {
-        grassArr[i].mull();
+        grassArr[i].mul();
     }
 
     for (var i in grassEaterArr) {
