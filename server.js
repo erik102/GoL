@@ -3,6 +3,8 @@ var app = express()
 var server = require('http').Server(app)
 var io = require('socket.io')(server);
 
+var fs = require("fs")
+
 app.use(express.static("."))
 
 app.get('/', function (req, res) {
@@ -121,6 +123,17 @@ function game() {
     }
 
     io.sockets.emit("send matrix", matrix);
+
+    var statistics = {}
+    setInterval(function(){
+        statistics.grass = grassArr.length
+        statistics.GrassEater = grassEaterArr.length
+        statistics.Predator = predatorArr.length
+        statistics.Obyect = obyectArr.length
+        statistics.Stone = stoneArr.length
+
+        fs.writeFileSync("statistics.json", JSON.stringify(statistics) )
+    },1000)
 
 }
 
